@@ -1,0 +1,16 @@
+{
+    "name": "api-skeletons/zf-doctrine-audit-api",
+    "description": "An API for zf-doctrine-audit-gui",
+    "require": {
+        "zfcampus/zf-apigility-doctrine": "^2.0",
+        "doctrine/doctrine-orm-module": "^0.10.0",
+        "api-skeletons/zf-doctrine-audit": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom H Anderson",
+            "email": "tom.h.anderson@gmail.com"
+        }
+    ]
+}
