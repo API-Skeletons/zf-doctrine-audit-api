@@ -1,11 +1,12 @@
 {
     "name": "api-skeletons/zf-doctrine-audit-api",
     "description": "An API for zf-doctrine-audit-gui",
+    "minimum-stability": "dev",
     "require": {
         "zfcampus/zf-apigility-doctrine": "^2.0",
         "zfcampus/zf-doctrine-querybuilder": "^1.4",
         "doctrine/doctrine-orm-module": "^0.9.2",
-        "api-skeletons/zf-doctrine-audit": "^1.0"
+        "api-skeletons/zf-doctrine-audit": "^1.0.1"
     },
     "license": "MIT",
     "authors": [
