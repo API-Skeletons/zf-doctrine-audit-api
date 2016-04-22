@@ -1,0 +1,57 @@
+<h1>Revision Entity</h1>
+<a href="#/revision/{{ revisionEntity._embedded.revision.id }}">
+  View Revision
+</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Revision Type</th>
+      <th>Target Entity</th>
+      <th>Title</th>
+      <th>Identifiers</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr
+      ng-class="
+        revisionEntity._embedded.revisionType.id == 1 ? 'success':
+        revisionEntity._embedded.revisionType.id == 2 ? 'warning':
+        'danger'
+      "
+    >
+      <td> {{ revisionEntity.id }} </td>
+      <td> {{ revisionEntity._embedded.revisionType.name }} </td>
+      <td> {{ revisionEntity._embedded.targetEntity.name }}</td>
+      <td> {{ revisionEntity.title }} </td>
+
+      <td>
+        <span ng-repeat="revisionEntityIdentifierValue in revisionEntityIdentifierValues._embedded.revision_entity_identifier_value">
+          {{ revisionEntityIdentifierValue._embedded.identifier.fieldName }}: {{ revisionEntityIdentifierValue.value }}
+        </span>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+
+<h2>Values</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="(key, value) in revisionEntityValue">
+      <td>{{ key }}</td>
+      <td>{{ value }} </td>
+    </tr>
+  </tbody>
+</table>
+

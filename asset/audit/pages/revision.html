@@ -1,0 +1,38 @@
+<h1>Revisions</h1>
+
+<ul class="pagination center-block">
+  <li ng-repeat="(name, link) in collection._links">
+    <a ng-click="load(link.href)">{{ name }}</a>
+  </li>
+</ul>
+
+<div ng-show="collection.page">
+  Showing page {{ collection.page }} of {{ collection.page_count }}
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>User ID</th>
+      <th>User Name</th>
+      <th>User Email</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+
+  <tbody ng-init="load()">
+    <tr ng-repeat="revision in collection._embedded.revision">
+      <td> {{ revision.createdAt | date:"yyyy-mm-dd HH:mm:ss"  }} GMT</td>
+      <td> {{ revision.userId }}</td>
+      <td> {{ revision.userName }}</td>
+      <td> {{ revision.userEmail }}</td>
+      <td> {{ revision.comment }}</td>
+      <td>
+        <a class="btn btn-info" href="#/revision/{{ revision.id }}">
+          View
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

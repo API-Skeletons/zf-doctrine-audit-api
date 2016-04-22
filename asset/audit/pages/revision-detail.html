@@ -1,0 +1,55 @@
+<h1>Revision Detail</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>User ID</th>
+      <th>User Name</th>
+      <th>User Email</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td> {{ revision.createdAt | date:"yyyy-mm-dd HH:mm:ss"  }} GMT</td>
+      <td> {{ revision.userId }}</td>
+      <td> {{ revision.userName }}</td>
+      <td> {{ revision.userEmail }}</td>
+      <td> {{ revision.comment }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Revision Entities</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Revision Type</th>
+      <th>Target Entity</th>
+      <th>Title</th>
+      <th>Detail</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="revisionEntity in revisionEntities._embedded.revision_entity"
+      ng-class="
+        revisionEntity._embedded.revisionType.id == 1 ? 'success':
+        revisionEntity._embedded.revisionType.id == 2 ? 'warning':
+        'danger'
+      "
+    >
+      <td> {{ revisionEntity._embedded.revisionType.name }} </td>
+      <td> {{ revisionEntity._embedded.targetEntity.name }}</td>
+      <td> {{ revisionEntity.title }} </td>
+      <td>
+        <a class="btn btn-info" href="#/revision-entity/{{ revisionEntity.id }}">
+          View
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

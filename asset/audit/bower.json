@@ -1,0 +1,24 @@
+{
+  "name": "zf-doctrine-audit-gui",
+  "authors": [
+    "Tom H Anderson <tom.h.anderson@gmail.com>"
+  ],
+  "description": "A GUI for zf-doctrine-audit-api",
+  "main": "",
+  "keywords": [
+    "audit",
+    "doctrine"
+  ],
+  "license": "MIT",
+  "homepage": "https://apiskeletons.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-loading-bar": "^0.9.0"
+  }
+}

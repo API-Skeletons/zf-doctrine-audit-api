@@ -1,11 +1,18 @@
 <?php
 return array(
-    'zf-apigility-doctrine-query-provider' => array(
-        'invokables' => array(
-            'zf-doctrine-audit-fetch-all' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm',
-        )
+    'asset_manager' => array(
+        'resolver_configs' => array(
+            'paths' => array(
+                __DIR__ . '/../asset'
+            ),
+        ),
     ),
 
+    'zf-apigility-doctrine-query-provider' => array(
+        'invokables' => array(
+            'zf-doctrine-audit-fetch-all' => 'ZF\\Doctrine\\QueryBuilder\\Query\\Provider\\DefaultOrm',
+        ),
+    ),
     'router' => array(
         'routes' => array(
             'audit-api.rest.doctrine.revision' => array(
@@ -98,6 +105,16 @@ return array(
                     ),
                 ),
             ),
+            'zf.doctrine.audit.api.rpc.revision-entity-value' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/audit/revision-entity-value/:revision_entity_id',
+                    'defaults' => array(
+                        'controller' => 'ZF\\Doctrine\\Audit\\Api\\V1\\Rpc\\RevisionEntityValue\\Controller',
+                        'action' => 'revisionEntityValue',
+                    ),
+                ),
+            ),
         ),
     ),
     'zf-versioning' => array(
@@ -112,6 +129,8 @@ return array(
             7 => 'audit-api.rest.doctrine.revision-entity-identifier-value',
             8 => 'audit-api.rest.doctrine.revision-type',
             9 => 'audit-api.rest.doctrine.target-entity',
+            10 => 'zf.doctrine.audit.api.rpc.revision-entity-value',
+            11 => 'zf.doctrine.audit.api.rpc.revision-entity-value',
         ),
     ),
     'zf-rest' => array(
@@ -318,6 +337,7 @@ return array(
             'ZF\\Doctrine\\Audit\\Api\\V1\\Rest\\RevisionEntityIdentifierValue\\Controller' => 'HalJson',
             'ZF\\Doctrine\\Audit\\Api\\V1\\Rest\\RevisionType\\Controller' => 'HalJson',
             'ZF\\Doctrine\\Audit\\Api\\V1\\Rest\\TargetEntity\\Controller' => 'HalJson',
+            'ZF\\Doctrine\\Audit\\Api\\V1\\Rpc\\RevisionEntityValue\\Controller' => 'Json',
         ),
         'accept-whitelist' => array(
             'ZF\\Doctrine\\Audit\\Api\\V1\\Rest\\Revision\\Controller' => array(
@@ -408,6 +428,24 @@ return array(
             'ZF\\Doctrine\\Audit\\Api\\V1\\Rest\\TargetEntity\\Controller' => array(
                 0 => 'application/vnd.audit-api.v1+json',
                 1 => 'application/json',
+            ),
+        ),
+        'accept_whitelist' => array(
+            'ZF\\Doctrine\\Audit\\Api\\V1\\Rpc\\RevisionEntityValue\\Controller' => array(
+                0 => 'application/vnd.zf.doctrine.audit.api.v1+json',
+                1 => 'application/json',
+                2 => 'application/*+json',
+                3 => 'application/vnd.zf.doctrine.audit.api.v1+json',
+                4 => 'application/json',
+                5 => 'application/*+json',
+            ),
+        ),
+        'content_type_whitelist' => array(
+            'ZF\\Doctrine\\Audit\\Api\\V1\\Rpc\\RevisionEntityValue\\Controller' => array(
+                0 => 'application/vnd.zf.doctrine.audit.api.v1+json',
+                1 => 'application/json',
+                2 => 'application/vnd.zf.doctrine.audit.api.v1+json',
+                3 => 'application/json',
             ),
         ),
     ),
@@ -638,7 +676,7 @@ return array(
             'object_manager' => 'doctrine.entitymanager.orm_zf_doctrine_audit',
             'by_value' => true,
             'strategies' => array(
-                'targetEntity' => 'ZF\Doctrine\Hydrator\Strategy\EntityLink',
+                'targetEntity' => 'ZF\\Doctrine\\Hydrator\\Strategy\\EntityLink',
             ),
             'use_generated_hydrator' => true,
         ),
@@ -937,6 +975,20 @@ return array(
                 ),
                 'validators' => array(),
             ),
+        ),
+    ),
+    'controllers' => array(
+        'factories' => array(
+            'ZF\\Doctrine\\Audit\\Api\\V1\\Rpc\\RevisionEntityValue\\Controller' => 'ZF\\Doctrine\\Audit\\Api\\V1\\Rpc\\RevisionEntityValue\\RevisionEntityValueControllerFactory',
+        ),
+    ),
+    'zf-rpc' => array(
+        'ZF\\Doctrine\\Audit\\Api\\V1\\Rpc\\RevisionEntityValue\\Controller' => array(
+            'service_name' => 'RevisionEntityValue',
+            'http_methods' => array(
+                0 => 'GET',
+            ),
+            'route_name' => 'zf.doctrine.audit.api.rpc.revision-entity-value',
         ),
     ),
 );
